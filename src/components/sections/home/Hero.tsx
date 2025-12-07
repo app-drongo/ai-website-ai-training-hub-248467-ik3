@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Zap, Users, TrendingUp } from 'lucide-react';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSmartNavigation } from '@/hooks/useSmartNavigation';
 
@@ -15,6 +16,9 @@ const DEFAULT_HERO = {
   ctaHref: '/signup',
   secondaryCtaText: 'View Demo',
   secondaryCtaHref: '/demo',
+  backgroundImage:
+    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=2025&auto=format&fit=crop',
+  backgroundAlt: 'AI neural network visualization',
   metrics: [
     { label: 'Models Trained', value: '50K+', icon: 'zap' },
     { label: 'Active Developers', value: '10K+', icon: 'users' },
@@ -61,8 +65,27 @@ export default function Hero(props: HeroProps) {
   };
 
   return (
-    <section id="hero" className="bg-background text-foreground py-20 lg:py-32">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="hero"
+      className="relative bg-background text-foreground py-20 lg:py-32 overflow-hidden"
+    >
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={config.backgroundImage}
+          alt={config.backgroundAlt}
+          data-editable-src="backgroundImage"
+          fill
+          className="object-cover object-center"
+          priority
+          quality={90}
+        />
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto">
           {/* Announcement Badge */}
           <div
@@ -70,7 +93,7 @@ export default function Hero(props: HeroProps) {
           >
             <Badge
               variant="secondary"
-              className="bg-primary/10 text-primary border-primary/20 px-4 py-2"
+              className="bg-primary/20 text-primary border-primary/30 px-4 py-2 backdrop-blur-sm"
             >
               <span data-editable="announcement">{config.announcement}</span>
             </Badge>
@@ -80,7 +103,7 @@ export default function Hero(props: HeroProps) {
           <div
             className={`mb-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-foreground drop-shadow-sm">
               <span data-editable="title">{config.title}</span>
             </h1>
           </div>
@@ -89,7 +112,7 @@ export default function Hero(props: HeroProps) {
           <div
             className={`mb-10 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
               <span data-editable="subtitle">{config.subtitle}</span>
             </p>
           </div>
@@ -104,7 +127,7 @@ export default function Hero(props: HeroProps) {
                 onClick={handlePrimaryClick}
                 data-editable-href="ctaHref"
                 data-href={config.ctaHref}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-semibold group"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-semibold group shadow-lg"
               >
                 <span data-editable="ctaText">{config.ctaText}</span>
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -115,7 +138,7 @@ export default function Hero(props: HeroProps) {
                 onClick={handleSecondaryClick}
                 data-editable-href="secondaryCtaHref"
                 data-href={config.secondaryCtaHref}
-                className="px-8 py-6 text-lg font-semibold border-border hover:bg-accent hover:text-accent-foreground"
+                className="px-8 py-6 text-lg font-semibold border-border/50 hover:bg-accent/80 hover:text-accent-foreground backdrop-blur-sm bg-background/50"
               >
                 <span data-editable="secondaryCtaText">{config.secondaryCtaText}</span>
               </Button>
@@ -130,7 +153,7 @@ export default function Hero(props: HeroProps) {
               {config.metrics.map((metric, idx) => (
                 <Card
                   key={idx}
-                  className="bg-card text-card-foreground border-border hover:bg-accent/50 transition-colors"
+                  className="bg-card/80 text-card-foreground border-border/50 hover:bg-accent/60 transition-colors backdrop-blur-sm shadow-lg"
                 >
                   <CardContent className="p-6 text-center">
                     <div className="flex justify-center mb-3 text-primary">
@@ -154,7 +177,7 @@ export default function Hero(props: HeroProps) {
           >
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               {config.features.map((feature, idx) => (
-                <div key={idx} className="flex items-center">
+                <div key={idx} className="flex items-center backdrop-blur-sm">
                   <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
                   <span data-editable={`features[${idx}]`}>{feature}</span>
                 </div>
