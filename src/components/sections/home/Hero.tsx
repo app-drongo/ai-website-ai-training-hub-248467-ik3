@@ -69,21 +69,19 @@ export default function Hero(props: HeroProps) {
       id="hero"
       className="relative bg-background text-foreground min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background Image with Enhanced Overlay */}
+      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src={config.backgroundImage}
           alt={config.backgroundAlt}
           data-editable-src="backgroundImage"
           fill
-          className="object-cover object-center scale-105"
+          className="object-cover object-center"
           priority
-          quality={95}
+          quality={90}
         />
-        {/* Multi-layered overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 to-background/90"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-accent/20"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-background/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-accent/10"></div>
       </div>
 
       {/* Animated Background Elements */}
