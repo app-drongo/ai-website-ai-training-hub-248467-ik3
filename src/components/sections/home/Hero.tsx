@@ -17,8 +17,8 @@ const DEFAULT_HERO = {
   secondaryCtaText: 'View Demo',
   secondaryCtaHref: '/demo',
   backgroundImage:
-    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=2025&auto=format&fit=crop',
-  backgroundAlt: 'AI neural network visualization',
+    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=2025&auto=format&fit=crop&ixlib=rb-4.0.3',
+  backgroundAlt: 'AI neural network visualization with glowing connections',
   metrics: [
     { label: 'Models Trained', value: '50K+', icon: 'zap' },
     { label: 'Active Developers', value: '10K+', icon: 'users' },
@@ -67,33 +67,41 @@ export default function Hero(props: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative bg-background text-foreground py-20 lg:py-32 overflow-hidden"
+      className="relative bg-background text-foreground min-h-screen flex items-center overflow-hidden"
     >
-      {/* Background Image with Overlay */}
+      {/* Background Image with Enhanced Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src={config.backgroundImage}
           alt={config.backgroundAlt}
           data-editable-src="backgroundImage"
           fill
-          className="object-cover object-center"
+          className="object-cover object-center scale-105"
           priority
-          quality={90}
+          quality={95}
         />
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20"></div>
+        {/* Multi-layered overlay for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/85 to-background/90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-accent/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-background/60"></div>
+      </div>
+
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 z-5">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-4xl mx-auto">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center max-w-5xl mx-auto">
           {/* Announcement Badge */}
           <div
             className={`mb-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
             <Badge
               variant="secondary"
-              className="bg-primary/20 text-primary border-primary/30 px-4 py-2 backdrop-blur-sm"
+              className="bg-primary/20 text-primary border-primary/30 px-6 py-3 backdrop-blur-md shadow-lg hover:bg-primary/30 transition-colors"
             >
               <span data-editable="announcement">{config.announcement}</span>
             </Badge>
@@ -101,18 +109,23 @@ export default function Hero(props: HeroProps) {
 
           {/* Main Heading */}
           <div
-            className={`mb-6 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`mb-8 transition-all duration-1000 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-foreground drop-shadow-sm">
-              <span data-editable="title">{config.title}</span>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground leading-tight">
+              <span
+                data-editable="title"
+                className="bg-gradient-to-br from-foreground via-foreground to-muted-foreground bg-clip-text text-transparent drop-shadow-2xl"
+              >
+                {config.title}
+              </span>
             </h1>
           </div>
 
           {/* Subtitle */}
           <div
-            className={`mb-10 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            className={`mb-12 transition-all duration-1000 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
+            <p className="text-xl sm:text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed font-medium">
               <span data-editable="subtitle">{config.subtitle}</span>
             </p>
           </div>
@@ -121,16 +134,16 @@ export default function Hero(props: HeroProps) {
           <div
             className={`mb-16 transition-all duration-1000 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Button
                 size="lg"
                 onClick={handlePrimaryClick}
                 data-editable-href="ctaHref"
                 data-href={config.ctaHref}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 text-lg font-semibold group shadow-lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 px-10 py-7 text-xl font-bold group shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
               >
                 <span data-editable="ctaText">{config.ctaText}</span>
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
               </Button>
               <Button
                 variant="outline"
@@ -138,7 +151,7 @@ export default function Hero(props: HeroProps) {
                 onClick={handleSecondaryClick}
                 data-editable-href="secondaryCtaHref"
                 data-href={config.secondaryCtaHref}
-                className="px-8 py-6 text-lg font-semibold border-border/50 hover:bg-accent/80 hover:text-accent-foreground backdrop-blur-sm bg-background/50"
+                className="px-10 py-7 text-xl font-bold border-2 border-border/60 hover:bg-accent/90 hover:text-accent-foreground backdrop-blur-md bg-background/60 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
               >
                 <span data-editable="secondaryCtaText">{config.secondaryCtaText}</span>
               </Button>
@@ -149,20 +162,20 @@ export default function Hero(props: HeroProps) {
           <div
             className={`mb-12 transition-all duration-1000 delay-800 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
               {config.metrics.map((metric, idx) => (
                 <Card
                   key={idx}
-                  className="bg-card/80 text-card-foreground border-border/50 hover:bg-accent/60 transition-colors backdrop-blur-sm shadow-lg"
+                  className="bg-card/90 text-card-foreground border-border/60 hover:bg-accent/80 transition-all duration-300 backdrop-blur-md shadow-xl hover:shadow-2xl hover:scale-105 group"
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="flex justify-center mb-3 text-primary">
+                  <CardContent className="p-8 text-center">
+                    <div className="flex justify-center mb-4 text-primary group-hover:scale-110 transition-transform duration-300">
                       {getIcon(metric.icon)}
                     </div>
-                    <div className="text-2xl sm:text-3xl font-bold mb-1">
+                    <div className="text-3xl sm:text-4xl font-bold mb-2 text-foreground">
                       <span data-editable={`metrics[${idx}].value`}>{metric.value}</span>
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-base text-muted-foreground font-medium">
                       <span data-editable={`metrics[${idx}].label`}>{metric.label}</span>
                     </div>
                   </CardContent>
@@ -175,11 +188,16 @@ export default function Hero(props: HeroProps) {
           <div
             className={`transition-all duration-1000 delay-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
           >
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap justify-center gap-6 text-base text-muted-foreground">
               {config.features.map((feature, idx) => (
-                <div key={idx} className="flex items-center backdrop-blur-sm">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full mr-2"></div>
-                  <span data-editable={`features[${idx}]`}>{feature}</span>
+                <div
+                  key={idx}
+                  className="flex items-center backdrop-blur-sm bg-background/30 px-4 py-2 rounded-full border border-border/40"
+                >
+                  <div className="w-2 h-2 bg-primary rounded-full mr-3 animate-pulse"></div>
+                  <span data-editable={`features[${idx}]`} className="font-medium">
+                    {feature}
+                  </span>
                 </div>
               ))}
             </div>
