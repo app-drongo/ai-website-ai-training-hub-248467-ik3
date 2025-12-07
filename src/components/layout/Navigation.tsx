@@ -2,18 +2,19 @@
 
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, X, Zap, Brain } from 'lucide-react';
+import { Menu, Leaf, Zap } from 'lucide-react';
 import { useState } from 'react';
 import { useSmartNavigation } from '@/hooks/useSmartNavigation';
 
 const DEFAULT_NAVIGATION = {
   brandName: 'AI Training Hub',
-  brandIcon: 'brain',
+  brandIcon: 'leaf',
   ctaText: 'Get Started',
   ctaHref: '/signup',
   menuItems: [
-    { label: 'Hero', href: '#hero' },
+    { label: 'Home', href: '#hero' },
     { label: 'Features', href: '#features' },
+    { label: 'Pricing', href: '#pricing' },
   ],
 } as const;
 
@@ -33,7 +34,7 @@ export default function Navigation(props: NavigationProps) {
     navigate(config.ctaHref);
   };
 
-  const BrandIcon = config.brandIcon === 'brain' ? Brain : Zap;
+  const BrandIcon = config.brandIcon === 'leaf' ? Leaf : Zap;
 
   return (
     <section
@@ -44,7 +45,7 @@ export default function Navigation(props: NavigationProps) {
         <div className="flex items-center justify-between h-16">
           {/* Brand */}
           <div className="flex items-center space-x-2">
-            <div className="bg-primary text-primary-foreground p-2 rounded-lg">
+            <div className="bg-primary text-primary-foreground p-2 rounded-lg shadow-sm">
               <BrandIcon className="h-5 w-5" />
             </div>
             <span className="text-xl font-bold text-foreground" data-editable="brandName">
@@ -58,11 +59,12 @@ export default function Navigation(props: NavigationProps) {
               <button
                 key={idx}
                 onClick={() => handleNavClick(item.href)}
-                className="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200 font-medium relative group"
                 data-editable-href={`menuItems[${idx}].href`}
                 data-href={item.href}
               >
                 <span data-editable={`menuItems[${idx}].label`}>{item.label}</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
               </button>
             ))}
           </div>
@@ -71,7 +73,7 @@ export default function Navigation(props: NavigationProps) {
           <div className="hidden md:block">
             <Button
               onClick={handleCtaClick}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
               data-editable-href="ctaHref"
               data-href={config.ctaHref}
             >
@@ -86,7 +88,7 @@ export default function Navigation(props: NavigationProps) {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-foreground hover:bg-accent hover:text-accent-foreground"
+                  className="text-foreground hover:bg-accent hover:text-accent-foreground transition-colors duration-200"
                 >
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open menu</span>
@@ -100,7 +102,7 @@ export default function Navigation(props: NavigationProps) {
                   {/* Mobile Header */}
                   <div className="flex items-center justify-between pb-6 border-b border-border">
                     <div className="flex items-center space-x-2">
-                      <div className="bg-primary text-primary-foreground p-2 rounded-lg">
+                      <div className="bg-primary text-primary-foreground p-2 rounded-lg shadow-sm">
                         <BrandIcon className="h-5 w-5" />
                       </div>
                       <span className="text-xl font-bold text-foreground" data-editable="brandName">
@@ -115,7 +117,7 @@ export default function Navigation(props: NavigationProps) {
                       <button
                         key={idx}
                         onClick={() => handleNavClick(item.href)}
-                        className="text-left text-lg text-muted-foreground hover:text-foreground transition-colors duration-200 py-2"
+                        className="text-left text-lg text-muted-foreground hover:text-primary transition-colors duration-200 py-3 px-2 rounded-md hover:bg-accent/50"
                         data-editable-href={`menuItems[${idx}].href`}
                         data-href={item.href}
                       >
@@ -128,7 +130,7 @@ export default function Navigation(props: NavigationProps) {
                   <div className="pt-6 border-t border-border">
                     <Button
                       onClick={handleCtaClick}
-                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors duration-200"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 shadow-sm hover:shadow-md"
                       data-editable-href="ctaHref"
                       data-href={config.ctaHref}
                     >
