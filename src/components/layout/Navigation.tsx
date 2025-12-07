@@ -14,7 +14,7 @@ const DEFAULT_NAVIGATION = {
   menuItems: [
     { label: 'Home', href: '#hero' },
     { label: 'Features', href: '#features' },
-    { label: 'Pricing', href: '#pricing' },
+    { label: 'Pricing', href: '/pricing' },
   ],
 } as const;
 
