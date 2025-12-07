@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Zap, Users, TrendingUp } from 'lucide-react';
-import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useSmartNavigation } from '@/hooks/useSmartNavigation';
 
@@ -17,8 +16,7 @@ const DEFAULT_HERO = {
   secondaryCtaText: 'View Demo',
   secondaryCtaHref: '/demo',
   backgroundImage:
-    'https://images.unsplash.com/photo-1518709268805-4e9042af2176?q=80&w=2025&auto=format&fit=crop&ixlib=rb-4.0.3',
-  backgroundAlt: 'AI neural network visualization with glowing connections',
+    'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=1920&h=1080&fit=crop',
   metrics: [
     { label: 'Models Trained', value: '50K+', icon: 'zap' },
     { label: 'Active Developers', value: '10K+', icon: 'users' },
@@ -67,22 +65,12 @@ export default function Hero(props: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative bg-background text-foreground min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center overflow-hidden"
+      style={{ backgroundImage: `url('${config.backgroundImage}')` }}
     >
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={config.backgroundImage}
-          alt={config.backgroundAlt}
-          data-editable-src="backgroundImage"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-background/90"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-accent/10"></div>
-      </div>
+      {/* Dark overlay for text readability */}
+      <div className="absolute inset-0 bg-background/80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20" />
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 z-5">
@@ -90,7 +78,7 @@ export default function Hero(props: HeroProps) {
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      {/* Content */}
+      {/* Content with z-10 to appear above overlay */}
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center max-w-5xl mx-auto">
           {/* Announcement Badge */}
